@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LegitInfo — Verified Social & News Platform</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+  </style>
+</head>
+<body>
+  <div class="app-layout">
+    
+    <!-- Top Sticky Navigation Bar -->
+    <header class="navbar">
+      <div class="brand-section" onclick="location.reload()">
+        <div class="brand-logo">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+        <div class="brand-title">
+          LegitInfo
+          <span class="brand-pill">PROTOTYPE</span>
+        </div>
+      </div>
+
+      <!-- Animated View Switcher (Posts vs News) -->
+      <nav class="tab-navigation" aria-label="Main Views">
+        <div class="tab-indicator" id="tab-indicator"></div>
+        <button class="tab-btn active" id="tab-posts" type="button">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          Posts
+          <span class="tab-badge">Feed</span>
+        </button>
+        <button class="tab-btn" id="tab-news" type="button">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
+            <path d="M18 14h-8"/>
+            <path d="M15 18h-5"/>
+            <path d="M10 6h8v4h-8V6Z"/>
+          </svg>
+          News
+          <span class="tab-badge" style="background: rgba(16, 185, 129, 0.25); color: #34D399;">Hot</span>
+        </button>
+      </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <div class="search-bar">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" placeholder="Search claims, topics...">
+        </div>
+
+        <button class="icon-btn" title="Notifications" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span class="notification-dot"></span>
+        </button>
+
+        <div class="nav-avatar-wrap" title="Victor Ejike Profile">
+          <img src="assets/avatar_victor.png" alt="Victor Ejike" class="nav-avatar">
+          <span class="status-indicator"></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="main-content">
+      
+      <!-- PAGE 1: POSTS VIEW -->
+      <div id="posts-view" class="page-view">
+        
+        <!-- Creator Prompt Card -->
+        <div class="creator-prompt-card" id="open-create-post-modal">
+          <div class="author-avatar-wrap">
+            <img src="assets/avatar_victor.png" alt="Victor" class="author-avatar" style="width:38px;height:38px;">
+            <span class="status-indicator" style="width:8px;height:8px;"></span>
+          </div>
+          <div class="creator-prompt-input">
+            What's on your mind, Victor?
+          </div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </div>
+
+        <!-- Feed List -->
+        <div id="feed-container">
+          
+          <!-- PRIMARY FEATURED POST (From Screenshot) -->
+          <article class="feed-card">
+            
+            <div class="card-header">
+              <div class="author-info">
+                <div class="author-avatar-wrap">
+                  <img src="assets/avatar_victor.png" alt="Victor Ejike" class="author-avatar">
+                  <span class="status-indicator"></span>
+                </div>
+                <div class="author-meta">
+                  <div class="author-name-row">
+                    <span class="author-name">Victor Ejike</span>
+                    <svg class="verified-icon" viewBox="0 0 24 24">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                  </div>
+                  <div class="post-meta-sub">
+                    <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    <span>2h ago</span>
+                    <span class="meta-dot">•</span>
+                    <span>Public</span>
+                  </div>
+                </div>
+              </div>
+              <button class="card-menu-btn" title="Options" type="button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="5" cy="12" r="2"></circle>
+                  <circle cx="12" cy="12" r="2"></circle>
+                  <circle cx="19" cy="12" r="2"></circle>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Card Content Text -->
+            <div class="card-content">
+              <p class="post-text">
+                Building the future with AI. 🚀<br>
+                Small steps everyday, big results soon.
+              </p>
+              <div class="post-hashtags">
+                <span class="hashtag">#AI</span>
+                <span class="hashtag">#Technology</span>
+                <span class="hashtag">#Growth</span>
+                <span class="hashtag">#EJICODE</span>
+              </div>
+            </div>
+
+            <!-- Media Attachment -->
+            <div class="card-media-wrap">
+              <div class="post-image-container">
+                <img src="assets/laptop_precise.png" alt="AI Workspace Laptop" class="post-image">
+              </div>
+            </div>
+
+            <!-- Card Engagement Stats Bar -->
+            <div class="card-engagement-bar">
+              <div class="reaction-group" id="main-post-reactions" title="Click to like!">
+                <div class="reaction-icons-stack">
+                  <div class="reaction-bubble reaction-like">👍</div>
+                  <div class="reaction-bubble reaction-heart">❤️</div>
+                </div>
+                <span class="reaction-count" id="main-reaction-count">245</span>
+              </div>
+
+              <div class="engagement-actions-right">
+                <div class="stat-item" id="main-comments-stat" title="Jump to comments">
+                  <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  <span>32</span>
+                </div>
+                <div class="stat-item" id="main-share-btn" title="Share post">
+                  <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                  </svg>
+                  <span>12</span>
+                </div>
+              </div>
+            </div>
+
+          </article>
+
+          <!-- SIGNATURE SPLIT DUALITY COMMENTS SECTION -->
+          <section class="comments-container-card" aria-label="Perspectives and Comments">
+            
+            <div class="comments-header">
+              <div class="comments-title-wrap">
+                <div class="comments-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  <span id="header-comments-count">Comments (32)</span>
+                </div>
+              </div>
+
+              <!-- Community Consensus Ratio Meter -->
+              <div class="consensus-meter">
+                <span class="meter-label meter-agreed-val" id="consensus-agreed-pct">75% Agreed</span>
+                <div class="meter-track">
+                  <div class="meter-fill-agreed" id="consensus-bar-fill"></div>
+                </div>
+                <span class="meter-label meter-disagreed-val" id="consensus-disagreed-pct">25% Disagreed</span>
+              </div>
+            </div>
+
+            <!-- Two-Column Grid: Agreed vs Disagreed -->
+            <div class="comments-columns-grid">
+              
+              <!-- LEFT COLUMN: AGREED (24) -->
+              <div class="perspective-column agreed-column">
+                <div class="column-header">
+                  <div class="column-badge-left">
+                    <div class="badge-icon-wrap agreed-icon-wrap">✓</div>
+                    <span id="agreed-col-title">Agreed (24)</span>
+                  </div>
+                  <span class="column-counter-pill agreed-counter" id="agreed-header-counter">24</span>
+                </div>
+
+                <div class="comment-list" id="agreed-list">
+                  
+                  <!-- Comment 1: Sarah Williams -->
+                  <div class="comment-item">
+                    <img src="assets/avatar_sarah.png" alt="Sarah Williams" class="comment-avatar">
+                    <div class="comment-body">
+                      <div class="comment-author-row">
+                        <span class="comment-author-name">Sarah Williams</span>
+                        <span class="comment-reaction-badge agreed-reaction-badge" title="Agree with this">
+                          <span>👍</span>
+                          <span class="comment-count-val">12</span>
+                        </span>
+                      </div>
+                      <div class="comment-text">This is inspiring! Keep going! 💪</div>
+                      <div class="comment-timestamp">1h ago</div>
+                    </div>
+                  </div>
+
+                  <!-- Comment 2: Tech Bro -->
+                  <div class="comment-item">
+                    <img src="assets/avatar_techbro.png" alt="Tech Bro" class="comment-avatar">
+                    <div class="comment-body">
+                      <div class="comment-author-row">
+                        <span class="comment-author-name">Tech Bro</span>
+                        <span class="comment-reaction-badge agreed-reaction-badge" title="Agree with this">
+                          <span>👍</span>
+                          <span class="comment-count-val">8</span>
+                        </span>
+                      </div>
+                      <div class="comment-text">Great content! AI is the future. 🔥</div>
+                      <div class="comment-timestamp">45m ago</div>
+                    </div>
+                  </div>
+
+                  <!-- Comment 3: Kingsley -->
+                  <div class="comment-item">
+                    <img src="assets/avatar_kingsley.png" alt="Kingsley" class="comment-avatar">
+                    <div class="comment-body">
+                      <div class="comment-author-row">
+                        <span class="comment-author-name">Kingsley</span>
+                        <span class="comment-reaction-badge agreed-reaction-badge" title="Agree with this">
+                          <span>👍</span>
+                          <span class="comment-count-val">4</span>
+                        </span>
+                      </div>
+                      <div class="comment-text">Well said! Big moves ahead. 🚀</div>
+                      <div class="comment-timestamp">32m ago</div>
+                    </div>
+                  </div>
+
+                  <!-- Extra Expandable Comments Drawer -->
+                  <div class="extra-comments-drawer" id="agreed-extra-drawer">
+                    <div class="comment-item">
+                      <img src="assets/avatar_victor.png" alt="Elena" class="comment-avatar">
+                      <div class="comment-body">
+                        <div class="comment-author-row">
+                          <span class="comment-author-name">Elena Rostova</span>
+                          <span class="comment-reaction-badge agreed-reaction-badge">
+                            <span>👍</span>
+                            <span class="comment-count-val">9</span>
+                          </span>
+                        </div>
+                        <div class="comment-text">Multi-agent architecture is proving real ROI across dev teams right now.</div>
+                        <div class="comment-timestamp">28m ago</div>
+                      </div>
+                    </div>
+                    <div class="comment-item">
+                      <img src="assets/avatar_techbro.png" alt="Marcus" class="comment-avatar">
+                      <div class="comment-body">
+                        <div class="comment-author-row">
+                          <span class="comment-author-name">Marcus Vance</span>
+                          <span class="comment-reaction-badge agreed-reaction-badge">
+                            <span>👍</span>
+                            <span class="comment-count-val">5</span>
+                          </span>
+                        </div>
+                        <div class="comment-text">Consistency beats intensity every single time. Respect the grind.</div>
+                        <div class="comment-timestamp">18m ago</div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <button class="view-more-btn agreed-view-more" id="agreed-view-more-btn" type="button">
+                  View more (21)
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- RIGHT COLUMN: DISAGREED (8) -->
+              <div class="perspective-column disagreed-column">
+                <div class="column-header">
+                  <div class="column-badge-left">
+                    <div class="badge-icon-wrap disagreed-icon-wrap">✕</div>
+                    <span id="disagreed-col-title">Disagreed (8)</span>
+                  </div>
+                  <span class="column-counter-pill disagreed-counter" id="disagreed-header-counter">8</span>
+                </div>
+
+                <div class="comment-list" id="disagreed-list">
+                  
+                  <!-- Comment 1: Chinedu Okafor -->
+                  <div class="comment-item">
+                    <img src="assets/avatar_chinedu.png" alt="Chinedu Okafor" class="comment-avatar">
+                    <div class="comment-body">
+                      <div class="comment-author-row">
+                        <span class="comment-author-name">Chinedu Okafor</span>
+                        <span class="comment-reaction-badge disagreed-reaction-badge" title="Dispute this">
+                          <span>👎</span>
+                          <span class="comment-count-val">6</span>
+                        </span>
+                      </div>
+                      <div class="comment-text">AI is overrated. It won't replace real skills.</div>
+                      <div class="comment-timestamp">1h ago</div>
+                    </div>
+                  </div>
+
+                  <!-- Comment 2: Favour Tech -->
+                  <div class="comment-item">
+                    <img src="assets/avatar_favour.png" alt="Favour Tech" class="comment-avatar">
+                    <div class="comment-body">
+                      <div class="comment-author-row">
+                        <span class="comment-author-name">Favour Tech</span>
+                        <span class="comment-reaction-badge disagreed-reaction-badge" title="Dispute this">
+                          <span>👎</span>
+                          <span class="comment-count-val">4</span>
+                        </span>
+                      </div>
+                      <div class="comment-text">Too much hype. Let's be real about the risks.</div>
+                      <div class="comment-timestamp">52m ago</div>
+                    </div>
+                  </div>
+
+                  <!-- Comment 3: Bright Daniel -->
+                  <div class="comment-item">
+                    <img src="assets/avatar_bright.png" alt="Bright Daniel" class="comment-avatar">
+                    <div class="comment-body">
+                      <div class="comment-author-row">
+                        <span class="comment-author-name">Bright Daniel</span>
+                        <span class="comment-reaction-badge disagreed-reaction-badge" title="Dispute this">
+                          <span>👎</span>
+                          <span class="comment-count-val">2</span>
+                        </span>
+                      </div>
+                      <div class="comment-text">I think this is just another trend.</div>
+                      <div class="comment-timestamp">38m ago</div>
+                    </div>
+                  </div>
+
+                  <!-- Extra Expandable Comments Drawer -->
+                  <div class="extra-comments-drawer" id="disagreed-extra-drawer">
+                    <div class="comment-item">
+                      <img src="assets/avatar_chinedu.png" alt="David" class="comment-avatar">
+                      <div class="comment-body">
+                        <div class="comment-author-row">
+                          <span class="comment-author-name">David Sterling</span>
+                          <span class="comment-reaction-badge disagreed-reaction-badge">
+                            <span>👎</span>
+                            <span class="comment-count-val">7</span>
+                          </span>
+                        </div>
+                        <div class="comment-text">Data center energy costs and thermal throttling will cap adoption.</div>
+                        <div class="comment-timestamp">25m ago</div>
+                      </div>
+                    </div>
+                    <div class="comment-item">
+                      <img src="assets/avatar_favour.png" alt="Maya" class="comment-avatar">
+                      <div class="comment-body">
+                        <div class="comment-author-row">
+                          <span class="comment-author-name">Maya Lin</span>
+                          <span class="comment-reaction-badge disagreed-reaction-badge">
+                            <span>👎</span>
+                            <span class="comment-count-val">3</span>
+                          </span>
+                        </div>
+                        <div class="comment-text">Until hallucination rates drop below 0.1%, production safety is questionable.</div>
+                        <div class="comment-timestamp">14m ago</div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <button class="view-more-btn disagreed-view-more" id="disagreed-view-more-btn" type="button">
+                  View more (5)
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- INTERACTIVE COMMENT COMPOSER -->
+          <div class="comment-composer-card">
+            <div class="stance-selector">
+              <span class="stance-label">Select your stance before commenting:</span>
+              <div class="stance-pill-group">
+                <button class="stance-option-btn active-agree" id="stance-btn-agree" type="button">
+                  <span>✓</span> Agree
+                </button>
+                <button class="stance-option-btn" id="stance-btn-disagree" type="button">
+                  <span>✕</span> Disagree
+                </button>
+              </div>
+            </div>
+
+            <div class="comment-input-row">
+              <img src="assets/avatar_victor.png" alt="Victor" class="composer-avatar">
+              <div class="composer-field-wrap">
+                <input type="text" id="composer-comment-input" class="composer-input" placeholder="Write a verified comment or rebuttal...">
+                <button class="emoji-trigger-btn" id="emoji-trigger-btn" title="Add emoji" type="button">😊</button>
+              </div>
+              <button class="send-comment-btn" id="send-comment-btn" title="Post comment" type="button">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- SECOND COMMUNITY POST TO DEMONSTRATE FEED CONTINUITY -->
+          <article class="feed-card">
+            <div class="card-header">
+              <div class="author-info">
+                <div class="author-avatar-wrap">
+                  <img src="assets/avatar_sarah.png" alt="Dr. Amara Chen" class="author-avatar" style="border-color:#10B981;">
+                  <span class="status-indicator"></span>
+                </div>
+                <div class="author-meta">
+                  <div class="author-name-row">
+                    <span class="author-name">Dr. Amara Chen</span>
+                    <svg class="verified-icon" viewBox="0 0 24 24" style="fill:#10B981;color:#10B981;">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <span style="font-size:0.75rem; color:#10B981; font-weight:600; margin-left:4px;">Researcher</span>
+                  </div>
+                  <div class="post-meta-sub">
+                    <span>4h ago</span>
+                    <span class="meta-dot">•</span>
+                    <span>AI Safety Group</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-content">
+              <p class="post-text">
+                Benchmark update: Standard unit tests alone fail to capture multi-agent runaway edge cases. We need probabilistic sandbox evaluation before autonomous deployment.
+              </p>
+              <div class="post-hashtags">
+                <span class="hashtag">#Research</span>
+                <span class="hashtag">#SoftwareVerification</span>
+                <span class="hashtag">#LegitTech</span>
+              </div>
+            </div>
+            <div class="card-engagement-bar">
+              <div class="reaction-group">
+                <div class="reaction-icons-stack">
+                  <div class="reaction-bubble reaction-like">👍</div>
+                  <div class="reaction-bubble reaction-heart">❤️</div>
+                </div>
+                <span class="reaction-count">189</span>
+              </div>
+              <div class="engagement-actions-right">
+                <div class="stat-item">
+                  <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  <span>19</span>
+                </div>
+                <div class="stat-item">
+                  <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                  </svg>
+                  <span>8</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- PAGE 2: NEWS VIEW -->
+      <div id="news-view" class="page-view hidden">
+        
+        <div class="news-categories-bar">
+          <button class="category-chip active" data-category="all" type="button">All News</button>
+          <button class="category-chip" data-category="tech" type="button">AI & Tech</button>
+          <button class="category-chip" data-category="factcheck" type="button">Fact-Check Alerts</button>
+          <button class="category-chip" data-category="policy" type="button">Global Policy</button>
+          <button class="category-chip" data-category="science" type="button">Science & Energy</button>
+        </div>
+
+        <!-- HERO FEATURED BREAKING NEWS -->
+        <article class="featured-news-card">
+          <div class="featured-news-banner">
+            <span class="breaking-pill">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+              Breaking
+            </span>
+            <div class="legit-score-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <polyline points="9 12 11 14 15 10"/>
+              </svg>
+              98% LegitScore
+            </div>
+          </div>
+
+          <div class="featured-news-body">
+            <div class="news-source-row">
+              <span class="source-tag">Reuters • Verified Wire</span>
+              <span>•</span>
+              <span>18 mins ago</span>
+              <span>•</span>
+              <span style="color:#10B981;">3 Primary Citations</span>
+            </div>
+
+            <h2 class="featured-news-title">
+              Global AI Safety Consortium Establishes Standardized Verification Benchmark for Autonomous Agents
+            </h2>
+
+            <p class="featured-news-desc">
+              Thirty-two prominent academic institutions and frontier research labs have ratified a legally harmonized reporting charter requiring public proof-of-safety metrics prior to autonomous tool deployment.
+            </p>
+
+            <div class="factcheck-bar">
+              <div class="factcheck-top-row">
+                <span class="factcheck-verified-label">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  82% Verified Consensus (1,240 Experts)
+                </span>
+                <span class="factcheck-disputed-label">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </svg>
+                  18% Context Needed
+                </span>
+              </div>
+              <div class="factcheck-bar-track">
+                <div class="factcheck-bar-fill"></div>
+              </div>
+            </div>
+
+            <div class="news-actions-footer">
+              <button class="factcheck-btn" type="button">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                </svg>
+                Read Primary Citations Dossier
+              </button>
+              <div class="stat-item" style="color:#60A5FA;">
+                <span>142 Dual Debates ➔</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- NEWS FEED GRID -->
+        <div class="news-grid">
+          
+          <article class="news-card-item" data-category="tech">
+            <div class="news-card-header">
+              <span class="news-card-tag">AI & TECH</span>
+              <span class="legit-pill-small legit-pill-verified">
+                ✓ 95% Verified
+              </span>
+            </div>
+            <h3 class="news-card-title">
+              Open Weights Foundation Releases Fully Audited 100B Model with Reproducible Training Traces
+            </h3>
+            <p class="news-card-summary">
+              Full dataset hashes and token weighting logs have been mirrored across 18 universities, establishing a new record for public scientific transparency.
+            </p>
+            <div class="news-card-footer">
+              <span>MIT Tech Review • 2h ago</span>
+              <div class="news-consensus-pill">
+                <span style="color:var(--agreed-green); font-weight:700;">88 Agree</span>
+                <span>•</span>
+                <span style="color:var(--disagreed-red); font-weight:700;">11 Disagree</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="news-card-item" data-category="factcheck">
+            <div class="news-card-header">
+              <span class="news-card-tag" style="color:#F87171;">VIRAL CLAIM CHECK</span>
+              <span class="legit-pill-small legit-pill-debunked">
+                ✕ 12% False • DEBUNKED
+              </span>
+            </div>
+            <h3 class="news-card-title">
+              Claim: "Secret Quantum Algorithm Decrypts All 256-bit AES Communications"
+            </h3>
+            <p class="news-card-summary">
+              LegitInfo Fact Checkers tracked the claim to an unvetted April Fools preprint mirror. Independent cryptographic authorities confirmed zero lattice breakdown.
+            </p>
+            <div class="news-card-footer">
+              <span>Debunked by LegitInfo Core • 4h ago</span>
+              <div class="news-consensus-pill">
+                <span style="color:var(--agreed-green); font-weight:700;">540 Debunked</span>
+                <span>•</span>
+                <span style="color:var(--disagreed-red); font-weight:700;">22 Disputed</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="news-card-item" data-category="policy">
+            <div class="news-card-header">
+              <span class="news-card-tag">GLOBAL POLICY</span>
+              <span class="legit-pill-small legit-pill-verified">
+                ✓ 93% Verified
+              </span>
+            </div>
+            <h3 class="news-card-title">
+              European Digital Market Regulators Approve Fast-Track Licensing for Open Source LLMs
+            </h3>
+            <p class="news-card-summary">
+              Developers releasing weights with permissive licenses under 10B parameters receive explicit safe harbor exemptions under new legislative addendum.
+            </p>
+            <div class="news-card-footer">
+              <span>Financial Times • 6h ago</span>
+              <div class="news-consensus-pill">
+                <span style="color:var(--agreed-green); font-weight:700;">114 Agree</span>
+                <span>•</span>
+                <span style="color:var(--disagreed-red); font-weight:700;">32 Disagree</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="news-card-item" data-category="science">
+            <div class="news-card-header">
+              <span class="news-card-tag" style="color:#10B981;">SCIENCE & ENERGY</span>
+              <span class="legit-pill-small legit-pill-verified">
+                ✓ 91% Verified
+              </span>
+            </div>
+            <h3 class="news-card-title">
+              Smart Clean Energy Grid Integrates Real-Time Solar Micro-Inverters Across 14 States
+            </h3>
+            <p class="news-card-summary">
+              Automated load-balancing algorithms reduced peak load curtailment by 31% during yesterday's unprecedented grid stress test.
+            </p>
+            <div class="news-card-footer">
+              <span>Nature Energy • 7h ago</span>
+              <div class="news-consensus-pill">
+                <span style="color:var(--agreed-green); font-weight:700;">64 Agree</span>
+                <span>•</span>
+                <span style="color:var(--disagreed-red); font-weight:700;">7 Disagree</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- CREATE POST MODAL -->
+    <div class="modal-backdrop" id="create-post-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">Create Legit Post</div>
+          <button class="modal-close-btn" id="close-post-modal" type="button">✕</button>
+        </div>
+        <div class="modal-body">
+          <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+            <img src="assets/avatar_victor.png" alt="Victor" class="composer-avatar">
+            <div>
+              <div style="font-weight:700; font-size:0.95rem;">Victor Ejike</div>
+              <div style="font-size:0.75rem; color:#60A5FA;">Posting as Verified Contributor</div>
+            </div>
+          </div>
+          <textarea id="new-post-textarea" class="composer-textarea" placeholder="Share insights, technical claims, or updates to ignite community debate..."></textarea>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <span class="category-chip active" style="font-size:0.75rem; padding:0.25rem 0.65rem;">#Technology</span>
+            <span class="category-chip" style="font-size:0.75rem; padding:0.25rem 0.65rem;">#AI</span>
+            <span class="category-chip" style="font-size:0.75rem; padding:0.25rem 0.65rem;">#FactCheck</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <span style="font-size:0.8rem; color:var(--text-muted);">Posts follow LegitInfo Civil Guidelines</span>
+          <button class="btn-primary" id="submit-post-btn" type="button">Publish Post</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST BANNER -->
+    <div class="toast-banner" id="toast-banner">
+      <span id="toast-icon">✓</span>
+      <span id="toast-text">Action completed successfully</span>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
